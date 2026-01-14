@@ -1,41 +1,29 @@
 "use server";
 
+import { ActionState } from "@/types";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
-export async function updateTodoAction(todoId: number, isCompleted: boolean) {
-  try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/items/${todoId}`,
-      {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ isCompleted }),
-      }
-    );
-    if (!res.ok) {
-      throw new Error(res.statusText);
-    }
-
-    revalidatePath("/");
-    return {
-      status: true,
-      error: "",
-    };
-  } catch (err) {
-    return {
-      status: false,
-      error: "수정이 실패 했습니다",
-    };
-  }
-}
-
-export async function updateTodoDetailAction(id: number, formData: FormData) {
+export async function editTodoAction(
+  prevState: ActionState,
+  formData: FormData
+) {
+  const id = formData.get("todoId")?.toString();
   const name = formData.get("name")?.toString();
   const memo = formData.get("memo")?.toString();
   const isCompleted = formData.get("isCompleted") === "true";
   const image = formData.get("image") as File | null;
 
   let imageUrl = formData.get("imageUrl")?.toString();
+
+  if (!id || !name) {
+    return {
+      status: false,
+      error: "제목은 필수 입력 사항입니다.",
+    };
+  }
+  // 성공 여부를 판단하기 위한 변수
+  let isSuccess = false;
 
   try {
     if (image && image.size > 0) {
@@ -81,9 +69,17 @@ export async function updateTodoDetailAction(id: number, formData: FormData) {
     }
 
     revalidatePath("/");
-    return { status: true, error: "" };
+
+    isSuccess = true;
   } catch (err) {
     console.error(err);
+    // 에러가 나면 여기서 바로 리턴해서 끝냅니다.
     return { status: false, error: "서버 통신 중 오류 발생" };
   }
+
+  if (isSuccess) {
+    redirect("/");
+  }
+
+  return { status: true, error: "" };
 }

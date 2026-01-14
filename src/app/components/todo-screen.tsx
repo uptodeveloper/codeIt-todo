@@ -1,11 +1,10 @@
 "use client";
 
-import { createTodoAction } from "@/actions/create-todo-action";
-import { updateTodoAction } from "@/actions/update-todo-action";
 import { TodoData } from "@/types";
 import React, { startTransition, useOptimistic } from "react";
 import TodoAddForm from "./todo-add-form";
 import TodoList from "./todo-list";
+import { checkTodoAction } from "@/actions/check-todo-aciotn";
 
 export default function TodoScreen({
   initialTodos,
@@ -38,7 +37,7 @@ export default function TodoScreen({
       setOptimisticTodos({
         type: "ADD",
         payload: {
-          id: Math.random(),
+          id: Math.random(), // 이 부분을 어떻게 해야하나
           name,
           isCompleted: false,
         },
@@ -49,7 +48,7 @@ export default function TodoScreen({
   const handleToggleTodo = (id: number, isCompleted: boolean) => {
     startTransition(() => {
       setOptimisticTodos({ type: "TOGGLE", payload: { id, isCompleted } });
-      updateTodoAction(id, isCompleted);
+      checkTodoAction(id, isCompleted);
     });
   };
 

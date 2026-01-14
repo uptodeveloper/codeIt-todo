@@ -28,6 +28,7 @@ export async function createTodoAction(_: any, formData: FormData) {
       error: "",
     };
   } catch (err) {
+     console.error(err);
     return {
       status: false,
       error: "할 일 추가에 실패했습니다",
