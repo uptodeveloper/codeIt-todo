@@ -1,9 +1,25 @@
-import TodoAddForm from "./components/todo-add-form";
+import { TodoData } from "@/types";
+import Todoscreen from "./components/todo-screen";
 
-export default function Home() {
+async function getTodos() {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/${process.env.NEXT_PUBLIC_TENANT_ID}/items`,
+    { cache: "force-cache", next: { tags: ["todo-list"] } }
+  );
+  if (!res.ok) {
+    return <div>오류가 발생했습니다...</div>;
+  }
+
+  return res.json();
+}
+
+export default async function Home() {
+  const allTodos: TodoData[] = await getTodos();
   return (
-    <div>
-      <TodoAddForm />
-    </div>
+    <>
+      <div>
+        <Todoscreen initialTodos={allTodos} />
+      </div>
+    </>
   );
 }
