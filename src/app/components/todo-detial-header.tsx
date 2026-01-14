@@ -16,7 +16,7 @@ export default function TodoDetailHeader({
       }`}
     >
       <button
-        type="button" // form submit 방지
+        type="button"
         onClick={toggleCompleted}
         className={`w-8 h-8 rounded-full border-2 flex items-center justify-center ${
           isCompleted ? "bg-slate-800" : "bg-white"
@@ -25,7 +25,6 @@ export default function TodoDetailHeader({
         {isCompleted && <span className="text-white text-xs">V</span>}
       </button>
 
-      {/* name="name" 추가 -> FormData 자동 수집 */}
       <input
         name="name"
         value={name}

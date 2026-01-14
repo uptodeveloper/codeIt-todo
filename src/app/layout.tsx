@@ -26,10 +26,23 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-slate-100 text-slate-800`}
       >
         <Header />
-        <main>{children}</main>
+        <main
+          className="
+          w-full mx-auto 
+          px-4 md:px-6 
+          /* ✅ 모바일(기본): w-full */
+          /* ✅ 태블릿(md): 744px 고정 (시안 맞춤) */
+          md:max-w-186
+          /* ✅ 데스크탑(xl): 1200px로 확장 (시안 맞춤) */
+          xl:max-w-300
+          py-6 md:py-10
+        "
+        >
+          {children}
+        </main>
       </body>
     </html>
   );
