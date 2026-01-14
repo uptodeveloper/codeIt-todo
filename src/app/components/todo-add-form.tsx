@@ -17,13 +17,10 @@ export default function TodoAddForm({
   }, [state]);
 
   const handleSubmit = (formData: FormData) => {
-    // (A) 낙관적 업데이트 실행 (부모에게 알림 -> 화면 즉시 추가)
     onAddOptimistic(formData);
 
-    // (B) 폼 비우기 (엔터 치자마자 글자가 사라져야 진짜 빨라 보임)
     ref.current?.reset();
 
-    // (C) 진짜 서버 액션 실행 (useActionState의 트리거)
     formAction(formData);
   };
 
