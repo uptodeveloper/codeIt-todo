@@ -3,7 +3,7 @@ import { TodoData } from "@/types";
 
 async function getTodo(itemId: string) {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/${process.env.NEXT_PUBLIC_TENANT_ID}/items/${itemId}`,
+    `${process.env.NEXT_PUBLIC_API_SERVER_URL}/items/${itemId}`,
     {
       cache: "no-store", // 상세 정보는 수정이 잦으므로 최신 데이터 유지
     }

@@ -13,14 +13,11 @@ export async function createTodoAction(_: any, formData: FormData) {
   }
 
   try {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_SERVER_URL}/${process.env.NEXT_PUBLIC_TENANT_ID}/items`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
-      }
-    );
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/items`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name }),
+    });
     if (!res.ok) {
       throw new Error(res.statusText);
     }
