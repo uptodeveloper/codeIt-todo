@@ -9,3 +9,8 @@ export interface TodoData {
 export interface TodoItemProps extends TodoData {
   onToggle: (id: number, isCompleted: boolean) => void;
 }
+
+export type ActionState = {
+  status: boolean;
+  error: string;
+} | null;

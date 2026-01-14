@@ -5,7 +5,7 @@ async function getTodo(itemId: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/items/${itemId}`,
     {
-      cache: "no-store", // 상세 정보는 수정이 잦으므로 최신 데이터 유지
+      cache: "force-cache", //
     }
   );
 
@@ -24,9 +24,5 @@ export default async function Page({
   const { id } = await params;
   const todoData: TodoData = await getTodo(id);
 
-  return (
-    <div>
-      <TodoDetail todoData={todoData} />
-    </div>
-  );
+  return <TodoDetail todoData={todoData} />;
 }
