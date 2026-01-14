@@ -71,12 +71,11 @@ export default function TodoDetail({ todoData }: { todoData: TodoData }) {
 
   return (
     <form action={formAction} className="flex flex-col gap-6 max-w-5xl mx-auto">
-      {/* 🔥 핵심: FormData에 자동으로 실려갈 숨겨진 데이터들 */}
-      <input type="hidden" name="todoId" value={todoData.id} />
-      {/* 체크박스 상태를 hidden input으로 동기화 */}
-      <input type="hidden" name="isCompleted" value={String(isCompleted)} />
-      {/* 기존 이미지 URL (새 파일이 없을 때 사용됨) */}
-      <input type="hidden" name="imageUrl" value={imageUrl} />
+      <input name="todoId" value={todoData.id} hidden readOnly />
+
+      <input name="isCompleted" value={String(isCompleted)} hidden readOnly />
+
+      <input name="imageUrl" value={imageUrl} hidden readOnly />
 
       {/* 헤더 영역 */}
       <TodoDetailHeader

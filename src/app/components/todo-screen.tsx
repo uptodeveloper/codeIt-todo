@@ -37,7 +37,7 @@ export default function TodoScreen({
       setOptimisticTodos({
         type: "ADD",
         payload: {
-          id: Math.random(), // 이 부분을 어떻게 해야하나
+          id: Math.random(),
           name,
           isCompleted: false,
         },
@@ -55,11 +55,13 @@ export default function TodoScreen({
   const todoList = optimisticTodos.filter((todo) => !todo.isCompleted);
   const doneList = optimisticTodos.filter((todo) => todo.isCompleted);
   return (
-    <div className="flex flex-col gap-10">
+    <div className="flex flex-col min-h-screen">
       <TodoAddForm onAddOptimistic={handleAddTodo} />
-
-      {/* 리스트는 이제 단순히 보여주는 역할만 함 */}
-      <div className="flex flex-col md:flex-row gap-10">
+      {/* ✅ 반응형 그리드 수정 */}
+      {/* md:flex-row를 지우고 xl:flex-row로 변경합니다. */}
+      {/* Desktop (xl 이상): 가로 배치 (gap-6) */}
+      {/* Tablet (md) & Mobile: 세로 배치 (gap-4) */}
+      <div className="flex flex-col xl:flex-row gap-4 md:gap-6 xl:gap-10 items-start">
         <TodoList title="TODO" list={todoList} onToggle={handleToggleTodo} />
         <TodoList title="DONE" list={doneList} onToggle={handleToggleTodo} />
       </div>

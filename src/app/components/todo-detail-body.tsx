@@ -34,7 +34,6 @@ export default function TodoDetailBody({
           </label>
         )}
 
-        {/* name="image" 추가 -> 파일 선택 시 FormData 자동 수집 */}
         <input
           id="imgInput"
           name="image"
@@ -47,7 +46,7 @@ export default function TodoDetailBody({
 
       <div className="flex-1 flex flex-col rounded-2xl border bg-white p-4">
         <p className="text-center font-bold pb-2 text-slate-500">Memo</p>
-        {/* name="memo" 추가 */}
+
         <textarea
           name="memo"
           value={memo}

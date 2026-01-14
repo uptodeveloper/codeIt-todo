@@ -22,7 +22,7 @@ export async function editTodoAction(
       error: "제목은 필수 입력 사항입니다.",
     };
   }
-  // 성공 여부를 판단하기 위한 변수
+
   let isSuccess = false;
 
   try {
@@ -46,7 +46,6 @@ export async function editTodoAction(
       }
     }
 
-    // 3. 따온 URL(imageUrl)을 포함해서 정보 수정 요청 (PATCH)
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API_SERVER_URL}/items/${id}`,
       {
@@ -73,7 +72,7 @@ export async function editTodoAction(
     isSuccess = true;
   } catch (err) {
     console.error(err);
-    // 에러가 나면 여기서 바로 리턴해서 끝냅니다.
+
     return { status: false, error: "서버 통신 중 오류 발생" };
   }
 

@@ -11,7 +11,6 @@ export default function TodoDetailFooter({
 }) {
   return (
     <div className="flex justify-end gap-4">
-      {/* submit 버튼: 폼의 action 실행 */}
       <button
         type="submit"
         disabled={isPending}
@@ -20,7 +19,6 @@ export default function TodoDetailFooter({
         {isPending ? "저장 중..." : "수정 완료"}
       </button>
 
-      {/* 삭제 버튼: type="button"으로 지정하여 폼 전송 막고 별도 핸들러 실행 */}
       <button
         type="button"
         onClick={onDelete}
