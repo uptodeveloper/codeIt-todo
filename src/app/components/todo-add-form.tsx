@@ -65,14 +65,14 @@ export default function TodoAddForm({
           type="submit"
           disabled={isPending}
           variant={isButtonActive ? "primary" : "secondary"}
-          className="w-14 h-14 md:w-42 md:h-14 p-0 md:px-6 rounded-4xl"
+          className="flex-none w-14! h-14 md:w-42! md:h-14 p-0 md:px-6 rounded-4xl"
         >
           {isPending ? (
             "..."
           ) : (
             <>
               {/* 모바일: + 아이콘만 표시 */}
-              <div className="block md:hidden relative w-6 h-6">
+              <div className="block md:hidden relative w-6 h-6 flex-none">
                 <Image
                   src="/ic/plus.svg"
                   alt="추가"
