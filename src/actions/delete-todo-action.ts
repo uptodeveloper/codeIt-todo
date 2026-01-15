@@ -20,6 +20,7 @@ export async function deleteTodoAction(todoId: number) {
       error: "",
     };
   } catch (err) {
+    console.log(err);
     return {
       status: false,
       error: "삭제 중 오류가 발생 했습니다",

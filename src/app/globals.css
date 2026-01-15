@@ -1,1 +1,24 @@
+/* 나눔스퀘어 CDN 불러오기 */
+@import url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare.css");
+
 @import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-nanum-square: "NanumSquare", sans-serif;
+  }
+
+  body {
+    font-family: var(--font-nanum-square);
+    /* 에러 방지를 위해 @apply 대신 표준 CSS 속성 사용 권장 */
+    background-color: #f8fafc; /* bg-slate-100 */
+    color: #1e293b; /* text-slate-800 */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* 3. 시안의 Bold 구분을 위한 클래스 */
+.font-bold {
+  font-weight: 700;
+}

@@ -1,3 +1,16 @@
+/**
+ * [상세 페이지 폼 컨테이너]
+ * * @description
+ * 할 일의 수정 및 삭제 기능을 담당하는 클라이언트 컴포넌트입니다.
+ * * @features
+ * 1. **Server Actions 연동**:
+ * - `useActionState` 훅을 사용하여 폼 제출 상태(Pending, Success, Error)를 체계적으로 관리합니다.
+ * 2. **클라이언트 측 유효성 검사**:
+ * - 이미지 업로드 시 파일 크기(5MB) 및 파일명(영문) 정규식 검사를 1차적으로 수행하여 불필요한 서버 요청을 차단했습니다.
+ * 3. **안전한 페이지 이동**:
+ * - 삭제 완료 후 `router.refresh()`와 `router.push`를 순차적으로 실행하여 데이터 정합성을 맞춘 후 이동합니다.
+ */
+
 "use client";
 
 import { deleteTodoAction } from "@/actions/delete-todo-action";
@@ -73,7 +86,7 @@ export default function TodoDetail({ todoData }: { todoData: TodoData }) {
   return (
     <form
       action={formAction}
-      className="max-w-[1200px] mx-auto flex flex-col gap-6 px-4 md:px-6 lg:px-0 py-6 md:py-10"
+      className="max-w-300 mx-auto flex flex-col gap-6 px-4 md:px-6 lg:px-0 py-6 md:py-10"
     >
       <input name="todoId" type="hidden" value={todoData.id} />
 

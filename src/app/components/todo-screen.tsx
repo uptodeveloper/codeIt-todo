@@ -1,6 +1,17 @@
+/**
+ * [메인 화면 컨테이너 (Client Component)]
+ * * @description
+ * 메인 페이지의 낙관적 업데이트(Optimistic Update)를 총괄하는 메인 컴포넌트입니다.
+ * * @features
+ * 1. **낙관적 업데이트 (Optimistic UI)**:
+ * - `useOptimistic` 훅을 도입하여 서버 응답을 기다리지 않고 UI를 즉시 업데이트합니다.
+ * 2. **비동기 트랜지션 관리**:
+ * - `useTransition`을 활용하여 상태 업데이트의 우선순위를 관리하고, UI 멈춤(Blocking) 현상을 방지했습니다.
+ */
+
 "use client";
 
-import { TodoData } from "@/types";
+import { TodoData, OptimisticAction } from "@/types";
 import React, { startTransition, useOptimistic } from "react";
 import TodoAddForm from "./todo-add-form";
 import TodoList from "./todo-list";
@@ -13,7 +24,7 @@ export default function TodoScreen({
 }) {
   const [optimisticTodos, setOptimisticTodos] = useOptimistic(
     initialTodos,
-    (state, action: { type: string; payload: any }) => {
+    (state: TodoData[], action: OptimisticAction) => {
       switch (action.type) {
         case "ADD":
           return [action.payload, ...state];
@@ -57,10 +68,7 @@ export default function TodoScreen({
   return (
     <div className="flex flex-col min-h-screen">
       <TodoAddForm onAddOptimistic={handleAddTodo} />
-      {/* ✅ 반응형 그리드 수정 */}
-      {/* md:flex-row를 지우고 xl:flex-row로 변경합니다. */}
-      {/* Desktop (xl 이상): 가로 배치 (gap-6) */}
-      {/* Tablet (md) & Mobile: 세로 배치 (gap-4) */}
+
       <div className="flex flex-col xl:flex-row gap-4 md:gap-6 xl:gap-10 items-start">
         <TodoList title="TODO" list={todoList} onToggle={handleToggleTodo} />
         <TodoList title="DONE" list={doneList} onToggle={handleToggleTodo} />

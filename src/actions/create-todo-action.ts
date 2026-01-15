@@ -1,8 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { ActionState } from "@/types";
 
-export async function createTodoAction(_: any, formData: FormData) {
+export async function createTodoAction(
+  prevState: ActionState,
+  formData: FormData
+) {
   const name = formData.get("name")?.toString();
 
   if (!name) {
@@ -28,7 +32,7 @@ export async function createTodoAction(_: any, formData: FormData) {
       error: "",
     };
   } catch (err) {
-     console.error(err);
+    console.error(err);
     return {
       status: false,
       error: "할 일 추가에 실패했습니다",

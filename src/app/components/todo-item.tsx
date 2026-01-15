@@ -2,7 +2,6 @@
 
 import { TodoItemProps } from "@/types";
 import Link from "next/link";
-import Image from "next/image";
 import TodoItemLayout from "./share/todo-item-layout";
 
 export default function TodoItem({
@@ -16,7 +15,7 @@ export default function TodoItem({
     <TodoItemLayout
       isCompleted={isCompleted}
       onToggle={() => onToggle(id, !isCompleted)}
-      className="h-12.5" // 리스트는 높이 50px 고정
+      className="h-12.5"
     >
       {isOptimistic ? (
         <div className="flex-1 flex gap-3 items-center text-slate-500 cursor-wait">

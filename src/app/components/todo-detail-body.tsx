@@ -1,3 +1,18 @@
+
+/**
+ * [상세 페이지 바디 컴포넌트]
+ * * @description
+ * 이미지 업로드와 메모 작성을 담당하는 UI 컴포넌트입니다.
+ * * @features
+ * 1. **동적 텍스트 영역 (Auto-resize Textarea)**:
+ * - `useRef`와 `scrollHeight`를 활용하여 텍스트 양에 따라 높이가 자동으로 늘어나는 UX를 구현했습니다.
+ * 2. **이미지 유효성 검사**:
+ * - 5MB 용량 제한 및 파일명(영문) 정규식 검사를 클라이언트 단에서 수행합니다.
+ * 3. **반응형 레이아웃**:
+ * - 모바일 환경에서는 Column(세로), 데스크탑 환경에서는 Row(가로) 방향으로 배치되도록 Flexbox를 설계했습니다.
+ */
+
+
 "use client";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
@@ -13,10 +28,10 @@ export default function TodoDetailBody({
   imageUrl: string;
   handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }) {
-  // ✅ 1. Textarea 높이 조절을 위한 Ref 생성
+  // Textarea 높이 조절을 위한 Ref 생성
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // ✅ 2. 내용(memo)이 바뀔 때마다 높이 조절 & 처음 로딩시 실행
+  // 내용(memo)이 바뀔 때마다 높이 조절 & 처음 로딩시 실행
   useEffect(() => {
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto"; // 높이 초기화
@@ -27,13 +42,13 @@ export default function TodoDetailBody({
 
   return (
     <div className="w-full flex flex-col lg:flex-row gap-6 mb-8">
-      {/* 🖼️ 이미지 업로드 영역 */}
+      {/*  이미지 업로드 영역 */}
       <div
         className={`
-          // ✅ 높이 고정: 시안대로 311px (모바일~데스크탑 모두)
+
           w-full h-77.75 
           
-          // 데스크탑에서 이미지 영역 너비 비율 설정 (약 40%)
+
           lg:w-2/5 
           
           relative rounded-3xl border-2 border-dashed border-slate-300 bg-slate-50 
@@ -42,7 +57,7 @@ export default function TodoDetailBody({
         onClick={() => document.getElementById("imgInput")?.click()}
       >
         {imageUrl ? (
-          // ✅ 1. 이미지가 있을 때 (꽉 찬 이미지 + 우측 하단 수정 버튼)
+          //  이미지가 있을 때 (꽉 찬 이미지 + 우측 하단 수정 버튼)
           <>
             <Image
               src={imageUrl}
@@ -54,13 +69,13 @@ export default function TodoDetailBody({
             {/* 우측 하단 수정 버튼 (진한색) */}
             <div className="absolute bottom-4 right-4 w-12 h-12 rounded-full border-2 border-slate-900 bg-slate-900/50 flex items-center justify-center z-10">
               <div className="relative w-6 h-6">
-                {/* edit.svg가 없다면 plus.svg를 쓰고 rotate 등을 줘도 됩니다 */}
+               
                 <Image src="/ic/edit.svg" alt="수정" fill />
               </div>
             </div>
           </>
         ) : (
-          // ✅ 2. 이미지가 없을 때 (가운데 아이콘 + 우측 하단 플러스 버튼)
+          // 이미지가 없을 때 (가운데 아이콘 + 우측 하단 플러스 버튼)
           <>
             {/* 가운데 회색 이미지 아이콘 */}
             <div className="relative w-16 h-16 opacity-100">
@@ -92,27 +107,27 @@ export default function TodoDetailBody({
         />
       </div>
 
-      {/* 📝 2. 메모 영역 (memo.svg 배경 적용) */}
+      {/*  메모 영역  */}
       <div
         className="
-          // ✅ 높이 고정: 시안대로 311px
+          
           w-full h-77.75
           
-          // 데스크탑에서 남은 공간 다 차지 (약 60%)
+        
           lg:flex-1
           
           relative rounded-3xl overflow-hidden
         "
       >
-        {/* ✅ 배경 이미지 (memo.svg) */}
+        {/* 배경 이미지 */}
         <Image
           src="/img/memo.svg"
           alt="메모 배경"
           fill
-          className="object-cover" // 비율 유지하며 꽉 채움
+          className="object-cover" 
         />
 
-        {/* ✅ 내용물 (텍스트) */}
+        {/*  내용물 (텍스트) */}
         <div className="relative z-10 flex flex-col w-full h-full p-6 text-center">
           <p className="font-bold text-amber-800 text-sm mb-4">Memo</p>
 

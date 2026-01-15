@@ -1,7 +1,21 @@
+/**
+ * [할 일 추가 폼 컴포넌트]
+ * * @description
+ * 새로운 할 일을 입력받고 추가하는 폼 컴포넌트입니다.
+ * 낙관적 업데이트(Optimistic Update)를 시작(Trigger)하는 핵심 역할을 수행합니다.
+ * * @features
+ * 1. **낙관적 업데이트 연동**:
+ * - 폼 제출 시 서버 응답을 기다리지 않고 `onAddOptimistic`을 즉시 호출하여 화면에 먼저 할 일을 추가합니다.
+ * 2. **Server Actions 상태 관리**:
+ * - `useActionState` 훅을 사용하여 서버 로직의 진행 상태(Pending)와 결과(Error)를 핸들링합니다.
+ * 3. **입력 제어 및 UX**:
+ * - 사용자가 텍스트를 입력했는지 실시간으로 감지하여 버튼의 활성/비활성 상태(색상 변경)를 제어합니다.
+ */
+
 "use client";
 
 import { createTodoAction } from "@/actions/create-todo-action";
-import { useActionState, useEffect, useRef, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Image from "next/image";
 import Button from "./share/button";
 
@@ -46,7 +60,7 @@ export default function TodoAddForm({
                      placeholder-slate-500 text-slate-900 font-bold
                      shadow-[4px_4px_0px_0px_#0f172a] transition-all"
         />
-        {/* ✅ 공통 Button 컴포넌트 사용 */}
+        {/* 공통 Button 컴포넌트 사용 */}
         <Button
           type="submit"
           disabled={isPending}

@@ -14,3 +14,11 @@ export type ActionState = {
   status: boolean;
   error: string;
 } | null;
+
+type AddAction = { type: "ADD"; payload: TodoData };
+type ToggleAction = {
+  type: "TOGGLE";
+  payload: { id: number; isCompleted: boolean };
+};
+
+export type OptimisticAction = AddAction | ToggleAction;

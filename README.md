@@ -1,37 +1,38 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Do it 할 일 관리 서비스
 
-## Getting Started
+디자인 시안 준수하여 개발한 Next-app-router 버전 TodoList 입니다.
 
-First, run the development server:
+서버 액션(Server Actions)과 낙관적 업데이트(Optimistic UI)를 활용해
+빠르고 편안한 경험을 제공합니다.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 기술 스택
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Framework**: Next.js 15 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS, PostCSS
+- **State Management**: React Hooks (useOptimistic, useActionState)
+- **Deployment**: Vercel
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✨ 핵심 기능 & 구현 디테일
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 렌더링 최적화
 
-## Learn More
+렌더링 최적화 및 캐시 전략 (Architecture)
 
-To learn more about Next.js, take a look at the following resources:
+- **On-Demand ISR 적용**: `generateStaticParams`로 상세 페이지를 정적(Static)으로 미리 생성하여, 동적 라우팅임에도 **SSG 수준의 빠른 초기 로딩 속도(FCP/TTI 최적화)**를 보장합니다.
+- **Next.js Caching 활용**:
+  - **Request Memoization & Data Cache**: 동일한 API 요청을 중복 호출하지 않고 캐싱된 데이터를 재사용하여 서버 부하를 줄였습니다.
+  - **Full Route Cache**: 정적 페이지 빌드를 통해 HTML/RSC Payload를 캐싱하여 렌더링 성능을 극대화했습니다.
+- **정밀한 데이터 갱신**: `revalidateTag`를 활용하여, 데이터 수정 시 관련된 특정 페이지의 캐시만 선택적으로 무효화(Purge)하여 최신성을 유지합니다.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 반응형 디자인(UI/UX)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Mobile / Tablet / Desktop 각 해상도에 최적화된 레이아웃 제공
 
-## Deploy on Vercel
+## 🚀 실행 방법 (Getting Started)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# codeIt-todo
+1. **프로젝트 클론 및 패키지 설치**
+   ```bash
+   git clone [레포지토리 주소]
+   npm install
+   ```
