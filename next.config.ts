@@ -11,6 +11,12 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  experimental: {
+    serverActions: {
+      // ✅ 이미지 업로드 용량 제한을 5MB로 늘립니다.
+      bodySizeLimit: "5mb",
+    },
+  },
 };
 
 export default nextConfig;
