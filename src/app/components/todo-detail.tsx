@@ -71,7 +71,10 @@ export default function TodoDetail({ todoData }: { todoData: TodoData }) {
   const isFormValid =
     !!imageUrl && name.trim().length > 0 && memo.trim().length > 0;
   return (
-    <form action={formAction} className="flex flex-col gap-6 max-w-5xl mx-auto">
+    <form
+      action={formAction}
+      className="max-w-[1200px] mx-auto flex flex-col gap-6 px-4 md:px-6 lg:px-0 py-6 md:py-10"
+    >
       <input name="todoId" type="hidden" value={todoData.id} />
 
       <input name="isCompleted" type="hidden" value={String(isCompleted)} />
