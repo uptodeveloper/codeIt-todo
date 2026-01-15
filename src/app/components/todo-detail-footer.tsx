@@ -38,7 +38,7 @@ export default function TodoDetailFooter({
         variant="danger"
         onClick={onDelete}
         disabled={isDeletePending}
-        icon="/ic/x.svg"
+        icon="/ic/exit.svg"
         className="
          w-full sm:w-42 h-14 
           text-lg rounded-3xl text-white
