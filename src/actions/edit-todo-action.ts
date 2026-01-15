@@ -14,7 +14,7 @@
 "use server";
 
 import { ActionState } from "@/types";
-import { revalidateTag } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function editTodoAction(
@@ -81,7 +81,7 @@ export async function editTodoAction(
     }
 
     revalidateTag(`todo-${id}`);
-    revalidateTag("todo-list");
+    revalidatePath("/");
 
     isSuccess = true;
   } catch (err) {
