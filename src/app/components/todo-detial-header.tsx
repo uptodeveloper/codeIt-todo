@@ -1,3 +1,14 @@
+/**
+ * [상세 페이지 헤더 컴포넌트]
+ * * @description
+ * 할 일의 제목을 수정하고 완료 상태를 토글하는 컴포넌트입니다.
+ * * @features
+ * 1. **제목 입력창 너비 자동 조절**:
+ * - Input 태그는 텍스트 길이에 따라 너비가 변하지 않는 한계가 있습니다.
+ * - 이를 해결하기 위해 입력된 텍스트와 동일한 내용을 가진 **숨겨진 span 태그**를 두어 너비를 감지하게 하고,
+ * - Input이 그 너비를 따라가도록 구현하여 자연스러운 밑줄 UI를 완성했습니다.
+ */
+
 import TodoItemLayout from "./share/todo-item-layout";
 
 export default function TodoDetailHeader({
@@ -16,27 +27,13 @@ export default function TodoDetailHeader({
       <TodoItemLayout
         isCompleted={isCompleted}
         onToggle={toggleCompleted}
-        // ✅ justify-center: 내용물을 가운데로 모음
         className="h-16 w-full overflow-hidden justify-center"
       >
-        {/* 📦 [Wrapper Div] 
-           - 역할: flex 아이템으로서 '글자 크기만큼만' 너비를 차지함
-           - relative: 내부 absolute input의 기준점
-        */}
         <div className="relative ">
-          {/* 👻 [Ghost Span] (너비 담당)
-             - 화면엔 안 보임 (invisible)
-             - 하지만 텍스트 내용만큼 공간을 밀어내서 div 너비를 만듦
-             - input과 똑같은 폰트 스타일을 줘야 오차가 없음
-          */}
           <span className="invisible font-bold text-lg whitespace-pre px-2 block">
             {name || "할 일을 입력해주세요"}
           </span>
 
-          {/* ✍️ [Real Input] (입력 담당)
-             - absolute inset-0: 부모 div 크기에 딱 맞게 덮어씌움
-             - 따라서 div가 글자만큼 늘어나면, 얘도 같이 늘어남!
-          */}
           <input
             type="text"
             name="name"

@@ -22,6 +22,7 @@ export async function checkTodoAction(todoId: number, isCompleted: boolean) {
       error: "",
     };
   } catch (err) {
+    console.log(err);
     return {
       status: false,
       error: "수정이 실패 했습니다",

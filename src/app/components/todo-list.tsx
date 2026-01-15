@@ -1,7 +1,7 @@
 "use client";
 
 import { TodoData } from "@/types";
-import React, { startTransition, useOptimistic } from "react";
+import React from "react";
 import TodoItem from "./todo-item";
 import Image from "next/image";
 
@@ -18,11 +18,11 @@ export default function TodoList({
     <div className="flex-1 w-full">
       <h2 className={`font-bold text-xl mb-5 `}>
         <Image
-          // ✅ 조건에 따라 다른 이미지 보여주기
+          // 조건에 따라 다른 이미지 보여주기
           src={title === "TODO" ? "/img/todo.svg" : "/img/done.svg"}
           alt="Empty"
-          className="object-contain" // 이미지 비율 망가지지 않게
-          priority // (선택) 로딩 우선순위 높임
+          className="object-contain"
+          priority
           width={title === "TO DO" ? 101 : 97}
           height={36}
         />
@@ -33,7 +33,7 @@ export default function TodoList({
           <div className="flex flex-col items-center justify-center py-10 text-center">
             <div className="relative w-60 h-60 mb-4">
               <Image
-                // ✅ 조건에 따라 다른 이미지 보여주기
+                //  조건에 따라 다른 이미지 보여주기
                 src={
                   title === "TODO"
                     ? "/img/empty-todo.svg"
@@ -41,8 +41,8 @@ export default function TodoList({
                 }
                 alt="Empty"
                 fill
-                className="object-contain" // 이미지 비율 망가지지 않게
-                priority // (선택) 로딩 우선순위 높임
+                className="object-contain"
+                priority
               />
             </div>
             <p className="text-slate-400 font-bold whitespace">

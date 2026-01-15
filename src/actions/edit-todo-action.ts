@@ -1,7 +1,20 @@
+/**
+ * [할 일 수정 Server Action]
+ * * @description
+ * 클라이언트 폼 데이터를 받아 DB를 업데이트하고, 관련된 캐시를 갱신하는 비동기 함수입니다.
+ * * @features
+ * 1. **데이터 무결성 검증**:
+ * - FormData로 넘어온 값들의 타입 안전성을 확인하고, 필수 값 누락을 방어합니다.
+ * 2. **정밀한 캐시 무효화 (On-Demand ISR)**:
+ * - 업데이트 성공 시 `revalidateTag('todo-{id}')`를 호출하여, 전체 페이지가 아닌
+ * '수정된 해당 아이템'의 정적 페이지 캐시만 콕 집어 갱신합니다.
+ * - 이를 통해 서버 부하를 최소화하면서도 데이터의 최신성을 보장합니다.
+ */
+
 "use server";
 
 import { ActionState } from "@/types";
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function editTodoAction(
@@ -67,7 +80,6 @@ export async function editTodoAction(
       throw new Error("수정에 실패했습니다.");
     }
 
-   
     revalidateTag(`todo-${id}`);
     revalidateTag("todo-list");
 
