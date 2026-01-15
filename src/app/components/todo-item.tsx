@@ -3,6 +3,7 @@
 import { TodoItemProps } from "@/types";
 import Link from "next/link";
 import Image from "next/image";
+import TodoItemLayout from "./share/todo-item-layout";
 
 export default function TodoItem({
   id,
@@ -12,35 +13,11 @@ export default function TodoItem({
 }: TodoItemProps) {
   const isOptimistic = !Number.isInteger(id);
   return (
-    <div
-      className={`w-full h-12.5 flex items-center gap-4 px-4
-        border-2 border-slate-900 rounded-[25px]
-        ${isCompleted ? "bg-violet-100" : "bg-white"}`}
+    <TodoItemLayout
+      isCompleted={isCompleted}
+      onToggle={() => onToggle(id, !isCompleted)}
+      className="h-12.5" // 리스트는 높이 50px 고정
     >
-      <div
-        onClick={() => onToggle(id, !isCompleted)}
-        className="cursor-pointer relative flex items-center justify-center shrink-0"
-      >
-        <div className={`w-8 h-8 relative  `}>
-          {/* ✅ 2. Next/Image 사용 (완료 상태일 때만 렌더링) */}
-          {isCompleted ? (
-            <Image
-              src="/ic/checked.svg"
-              alt="완료"
-              fill
-              className="object-contain" // 비율 유지
-            />
-          ) : (
-            <Image
-              src="/ic/unchecked.svg"
-              alt="미완료"
-              fill
-              className="object-contain" // 비율 유지
-            />
-          )}
-        </div>
-      </div>
-
       {isOptimistic ? (
         <div className="flex-1 flex gap-3 items-center text-slate-500 cursor-wait">
           <span>{name}</span>
@@ -62,6 +39,6 @@ export default function TodoItem({
           {name}
         </Link>
       )}
-    </div>
+    </TodoItemLayout>
   );
 }

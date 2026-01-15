@@ -3,6 +3,7 @@
 import { createTodoAction } from "@/actions/create-todo-action";
 import { useActionState, useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Button from "./share/button";
 
 export default function TodoAddForm({
   onAddOptimistic,
@@ -45,24 +46,12 @@ export default function TodoAddForm({
                      placeholder-slate-500 text-slate-900 font-bold
                      shadow-[4px_4px_0px_0px_#0f172a] transition-all"
         />
-        <button
-          disabled={isPending || !isButtonActive}
+        {/* ✅ 공통 Button 컴포넌트 사용 */}
+        <Button
           type="submit"
-          className={`shrink-0 bg-slate-200 text-slate-900 border-2 border-slate-900 
-                     rounded-4xl hover:bg-slate-300 font-bold 
-                     shadow-[4px_4px_0px_0px_#0f172a] active:shadow-none active:translate-x-1 active:translate-y-1 
-                     transition-all 
-                     flex items-center justify-center
-                     /* ✅ 모바일: 정사각형 버튼 (아이콘만) */
-                     w-14 h-14 
-                     /* ✅ 태블릿 이상: 직사각형 버튼 (텍스트 포함) */
-                     md:w-42 md:h-14
-                     ${
-                       isButtonActive
-                         ? "bg-violet-600 text-white hover:bg-violet-700" // 활성: 보라색
-                         : "bg-slate-200 text-slate-900 cursor-not-allowed" // 비활성: 회색
-                     }
-          `}
+          disabled={isPending}
+          variant={isButtonActive ? "primary" : "secondary"}
+          className="w-14 h-14 md:w-42 md:h-14 p-0 md:px-6 rounded-4xl"
         >
           {isPending ? (
             "..."
@@ -97,7 +86,7 @@ export default function TodoAddForm({
               </div>
             </>
           )}
-        </button>
+        </Button>
       </form>
     </section>
   );

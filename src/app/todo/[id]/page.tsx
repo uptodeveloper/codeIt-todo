@@ -5,7 +5,7 @@ async function getTodo(itemId: string) {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_SERVER_URL}/items/${itemId}`,
     {
-      cache: "force-cache", //
+      next: { tags: [`todo-${itemId}`] }, //
     }
   );
 
