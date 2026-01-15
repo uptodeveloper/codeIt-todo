@@ -3,8 +3,13 @@ import "./globals.css";
 import Header from "./components/main-header";
 
 export const metadata: Metadata = {
-  title: "Do it; 할 일 관리",
-  description: "나눔스퀘어 폰트가 적용된 할 일 관리 앱",
+  title: "Do it - 할 일 관리",
+  description: "심플하고 강력한 할 일 관리 서비스",
+  openGraph: {
+    title: "Do it - 할 일 관리",
+    description: "오늘 할 일을 놓치지 마세요!",
+    images: ["/img/cloud-doit.png"],
+  },
 };
 
 export default function RootLayout({
