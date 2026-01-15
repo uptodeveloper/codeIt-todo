@@ -1,7 +1,7 @@
 "use server";
 
 import { ActionState } from "@/types";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { redirect } from "next/navigation";
 
 export async function editTodoAction(
@@ -67,7 +67,9 @@ export async function editTodoAction(
       throw new Error("수정에 실패했습니다.");
     }
 
-    revalidatePath("/");
+   
+    revalidateTag(`todo-${id}`);
+    revalidateTag("todo-list");
 
     isSuccess = true;
   } catch (err) {

@@ -68,14 +68,15 @@ export default function TodoDetail({ todoData }: { todoData: TodoData }) {
       }
     });
   };
-
+  const isFormValid =
+    !!imageUrl && name.trim().length > 0 && memo.trim().length > 0;
   return (
     <form action={formAction} className="flex flex-col gap-6 max-w-5xl mx-auto">
-      <input name="todoId" value={todoData.id} hidden readOnly />
+      <input name="todoId" type="hidden" value={todoData.id} />
 
-      <input name="isCompleted" value={String(isCompleted)} hidden readOnly />
+      <input name="isCompleted" type="hidden" value={String(isCompleted)} />
 
-      <input name="imageUrl" value={imageUrl} hidden readOnly />
+      <input name="imageUrl" type="hidden" value={imageUrl} />
 
       {/* 헤더 영역 */}
       <TodoDetailHeader
@@ -97,6 +98,7 @@ export default function TodoDetail({ todoData }: { todoData: TodoData }) {
         isPending={isPending}
         isDeletePending={isDeletePending}
         onDelete={handleDelete}
+        isFormValid={isFormValid}
       />
     </form>
   );
